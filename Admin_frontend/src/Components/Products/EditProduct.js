@@ -5,6 +5,7 @@ import { Radio, Input } from "antd";
 import "antd/dist/antd.css";
 // import { useParams } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { API_URL } from "../../config/config";
 
 var fs = require('fs').promises;
 
@@ -31,7 +32,7 @@ function EditProduct(props) {
   }, [])
 
   const getUserById = () => {
-    axios.get(`http://localhost:8000/Admin/editProduct/${id}`)
+    axios.get(`${API_URL}/Admin/editProduct/${id}`)
       .then((response) => {
         console.log('responce', response)
 
@@ -60,10 +61,9 @@ function EditProduct(props) {
   }, [])
 
   const getAddCatagory = () => {
-    axios.get("http://localhost:8000/Admin/getCatagory")
-      .then((response) => {
-        setsubCatagory(response.data)
-      })
+    axios.get(`${API_URL}/Admin/getCatagory`).then((response) => {
+      setsubCatagory(response.data);
+    });
   }
 
   const handleCatagoryOnChange = (event) => {
@@ -81,10 +81,9 @@ function EditProduct(props) {
   }
 
   const getAddSubCatagory = () => {
-    axios.get("http://localhost:8000/Admin/getsubCatagory")
-      .then((response) => {
-        setNextSubCatagory(response.data)
-      })
+    axios.get(`${API_URL}/Admin/getsubCatagory`).then((response) => {
+      setNextSubCatagory(response.data);
+    });
   }
 
   const InputChange = (event) => {
@@ -166,18 +165,17 @@ function EditProduct(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8000/Admin/image',
+      url: `${API_URL}/Admin/image`,
       data: formData,
 
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then((response) => {
-        props.history.push('/list')
-
+        props.history.push("/list");
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
   const handleChange = (event) => {
     setImage((prevProps) => ({

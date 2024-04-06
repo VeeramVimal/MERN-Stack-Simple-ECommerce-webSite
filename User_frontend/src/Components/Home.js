@@ -6,10 +6,11 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import { Link } from 'react-router-dom';
 import { DropdownButton } from 'react-bootstrap';
+import { API_URL } from '../config/config';
 
 var config = {
-  imagePath: "http://localhost:8000/images/",
-}
+  imagePath: `${API_URL}/images/`,
+};
 
 const Home = (props) => {
 
@@ -39,7 +40,7 @@ const Home = (props) => {
   }, [])
 
   const getItemList = () => {
-    axios.get('http://localhost:8000/Admin/getProduct')
+    axios.get(`${API_URL}/Admin/getProduct`)
       .then((response) => {
         // console.log('reeeeeeeeeeeeeeees',response)
         setData(response.data)
@@ -48,7 +49,7 @@ const Home = (props) => {
   };
 
   const searchItem = () => {
-    axios.get('http://localhost:8000/Admin/getProduct')
+    axios.get(`${API_URL}/Admin/getProduct`)
       .then((response) => {
         setData(response.data);
         setFilteredData(response.data);

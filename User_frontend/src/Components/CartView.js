@@ -2,14 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCart } from "react-use-cart";
-
 import { Button, Table } from 'react-bootstrap';
-
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config/config';
 
 var config = {
-  imagePath: "http://localhost:8000/images/",
-}
+  imagePath: `${API_URL}/images/`,
+};
 
 const CartView = (props) => {
 

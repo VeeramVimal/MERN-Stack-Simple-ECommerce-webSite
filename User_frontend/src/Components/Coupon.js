@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCart } from "react-use-cart"
+import { API_URL } from '../config/config';
 
 var config = {
-    imagePath: "http://localhost:8000/images/",
-}
+  imagePath: `${API_URL}/images/`,
+};
 
 const CouponTable = (props) => {
 
@@ -39,11 +40,9 @@ const CouponTable = (props) => {
 
 
     const getCouponAmount =() =>{
-        axios.get("http://localhost:8000/Admin/getCoupen")
-        .then((response) =>{
-    
-            setAmount(response.data)
-        })
+        axios.get(`${API_URL}/Admin/getCoupen`).then((response) => {
+          setAmount(response.data);
+        });
        
         
     }

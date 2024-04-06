@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCart } from "react-use-cart";
 import { useHistory } from "react-router-dom";
+import { API_URL } from '../config/config';
 
 var config = {
-  imagePath: "http://localhost:8000/images/",
-}
+  imagePath: `${API_URL}/images/`,
+};
 
 const CheckOut1 = (props) => {
   const [checkOut, setcheckOut] = useState([]);
@@ -112,10 +113,9 @@ const CheckOut1 = (props) => {
   // }
 
   const getCoupondata = (event) => {
-    axios.get("http://localhost:8000/Admin/getCoupen")
-      .then((response) => {
-        setsubCoupon(response.data)
-      })
+    axios.get(`${API_URL}/Admin/getCoupen`).then((response) => {
+      setsubCoupon(response.data);
+    });
   }
 
   const handleClick = (event) => {

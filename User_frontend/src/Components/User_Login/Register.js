@@ -2,6 +2,7 @@ import React, { useState, useEffect, useHistory } from "react";
 import { Button } from 'react-bootstrap';
 import '../Styles.css';
 import axios from "axios";
+import { API_URL } from "../../config/config";
 // import { toast } from 'react-toastify';
 
 function Register(props) {
@@ -61,17 +62,18 @@ function Register(props) {
         Email,  Password
        } = State;
        
-        axios.post("http://localhost:8000/User/addUser", {
-          Email: Email,
-          Password: Password,
-        })
-          .then(response => {
-            props.history.push('/login')
+        axios
+          .post(`${API_URL}/User/addUser`, {
+            Email: Email,
+            Password: Password,
+          })
+          .then((response) => {
+            props.history.push("/login");
             // props.history.push('/Register/listTicket')
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err.response);
-          })   
+          });   
     }
   }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useHistory } from "react";
 import { Button } from 'react-bootstrap';
 import '../Styles.css';
 import axios from "axios";
+import { API_URL } from "../../config/config";
 // import { toast } from 'react-toastify';
 
 function Auth(props) {
@@ -30,10 +31,9 @@ function Auth(props) {
 
   const getLogin = () => {
 
-    axios.get("http://localhost:8000/User/getUser")
-      .then((response) => {
-        setLogin(response.data)
-      })
+    axios.get(`${API_URL}/User/getUser`).then((response) => {
+      setLogin(response.data);
+    });
   }
 
   const InputChange = (event) => {
@@ -90,22 +90,22 @@ function Auth(props) {
         Email, Password
       } = State;
 
-      axios.post('http://localhost:8000/User/logUser', {
-        Email: Email,
-        Password: Password,
-      })
+      axios
+        .post(`${API_URL}/User/logUser`, {
+          Email: Email,
+          Password: Password,
+        })
         .then((response) => {
           if (response.data) {
             let token = response.data.data;
-            localStorage.setItem("savedUserToken", 'Bearer' + token)
-            axios.defaults.headers.common['Authorization'] = 'Bearer' + token
-
+            localStorage.setItem("savedUserToken", "Bearer" + token);
+            axios.defaults.headers.common["Authorization"] = "Bearer" + token;
           }
-          props.history.push("/cart")
+          props.history.push("/cart");
         })
         .catch((error) => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     }
 
   }

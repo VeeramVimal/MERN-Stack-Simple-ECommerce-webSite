@@ -34,10 +34,9 @@ function AddProduct(props) {
   }, [])
 
   const getAddCatagory = () => {
-    axios.get("http://localhost:8000/Admin/getCatagory")
-      .then((response) => {
-        setsubCatagory(response.data)
-      })
+    axios.get(`${API_URL}/Admin/getCatagory`).then((response) => {
+      setsubCatagory(response.data);
+    });
   }
 
   const handleCatagoryOnChange = (event) => {
@@ -49,10 +48,9 @@ function AddProduct(props) {
   }
 
   const getAddSubCatagory = () => {
-    axios.get("http://localhost:8000/Admin/getsubCatagory")
-      .then((response) => {
-        setNextSubCatagory(response.data)
-      })
+    axios.get(`${API_URL}/Admin/getsubCatagory`).then((response) => {
+      setNextSubCatagory(response.data);
+    });
   }
 
   const InputChange = (event) => {
@@ -134,18 +132,17 @@ function AddProduct(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8000/Admin/image',
+      url: `${API_URL}/Admin/image`,
       data: formData,
 
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then((response) => {
-        props.history.push('/list')
-
+        props.history.push("/list");
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
   const handleChange = e => {
     if (e.target.files.length) {

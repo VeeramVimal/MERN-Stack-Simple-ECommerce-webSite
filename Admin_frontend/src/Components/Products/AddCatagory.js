@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import '../Styles/Styles.css';
+import { API_URL } from "../../config/config";
 
 function AddCatagory() {
     const [catagory, setCatagory] = useState();
@@ -25,23 +26,20 @@ function AddCatagory() {
     }
 
     const handleClick = () => {
-        axios.post('http://localhost:8000/Admin/addcatagory', variable)
-            .then((response) => {
-                let checkCatagory = JSON.parse(response.config.data);
-                let checkCat = checkCatagory.Catagory_name;
-                if (checkCat == catagory) {
-                    alert("Already added this catagory")
-                }
-                if (checkCat !== catagory) {
-                    alert("New Category Added");
-                }
-                 else {
-        axios.get("http://localhost:8000/Admin/getCatagory")
-            .then((response) => {
-                setsubCatagory(response.data)
-            })
-    }
-})
+      axios.post(`${API_URL}/Admin/addcatagory`, variable).then((response) => {
+        let checkCatagory = JSON.parse(response.config.data);
+        let checkCat = checkCatagory.Catagory_name;
+        if (checkCat == catagory) {
+          alert("Already added this catagory");
+        }
+        if (checkCat !== catagory) {
+          alert("New Category Added");
+        } else {
+          axios.get(`${API_URL}/Admin/getCatagory`).then((response) => {
+            setsubCatagory(response.data);
+          });
+        }
+      });
     }
 
 // const getAddCatagory = () => {
@@ -66,17 +64,17 @@ const SubVariable = {
 }
 // console.log(SubVariable,"SubVariable", selectSubCatagory);
 const handleOnClick = () => {
-    axios.post('http://localhost:8000/Admin/addsubcatagory', SubVariable)
-        .then((response) => {
-            alert("New Sub_Category Added");
+    axios
+      .post(`${API_URL}/Admin/addsubcatagory`, SubVariable)
+      .then((response) => {
+        alert("New Sub_Category Added");
 
-            if (response) {
-                axios.get("http://localhost:8000/Admin/getsubCatagory")
-                    .then((response) => {
-                        setNextSubCatagory(response.data)
-                    })
-            }
-        })
+        if (response) {
+          axios.get(`${API_URL}/Admin/getsubCatagory`).then((response) => {
+            setNextSubCatagory(response.data);
+          });
+        }
+      });
 }
 
 const handleSubOnChange = (event) => {

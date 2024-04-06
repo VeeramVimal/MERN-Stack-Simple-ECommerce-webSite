@@ -6,9 +6,10 @@ import '../Styles/Styles.css';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import AddCatagory from "./AddCatagory";
+import { API_URL } from "../../config/config";
 
 var config = {
-    imagePath: "http://localhost:8000/images/",
+    imagePath: `${API_URL}/images/`,
 }
 
 function ListUser(props) {
@@ -20,18 +21,18 @@ function ListUser(props) {
     }, [])
 
     const getUserList = () => {
-        axios.get('http://localhost:8000/Admin/getProduct')
-            .then((response) => {
-                setDate(response.data)
-            })
+        axios.get(`${API_URL}/Admin/getProduct`).then((response) => {
+          setDate(response.data);
+        });
     };
 
 
     const deleteList = (id) => {
-        axios.delete('http://localhost:8000/Admin/deleteProduct/' + id)
-            .then((response) => {
-                getUserList()
-            })
+        axios
+          .delete(`${API_URL}/Admin/deleteProduct/` + id)
+          .then((response) => {
+            getUserList();
+          });
     }
 
     let history = useHistory();
