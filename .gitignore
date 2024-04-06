@@ -1,5 +1,7 @@
-/Admin_frontend/node_modules
-Admin_frontend/package-lock.json
 /node_modules
-User_frontend/node_modules
+/Admin_frontend/node_modules
+/Admin_frontend/package-lock.json
+/User_frontend/node_modules
+/User_frontend/package-lock.json
 /backend/node_modules
+/backend/package-lock.json
